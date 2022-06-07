@@ -17,7 +17,7 @@ const [currentId,setCurrentId] = useState(0);
        <div className="container-fluid">
             <div className="row">
               <div className="col-md-9">
-              <LeftConent SetCurrentId={setCurrentId}/>
+              {/* <LeftConent SetCurrentId={setCurrentId}/> */}
               </div>
               <div className="col-md-3">
                 <Form currentId={currentId} setCurrentId={setCurrentId} />
