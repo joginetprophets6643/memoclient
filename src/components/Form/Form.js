@@ -1,19 +1,43 @@
 import React,{useState,useEffect} from 'react'
 import {useDispatch,useSelector} from 'react-redux';
-import {createPost} from '../../actions/posts'
+import {createPost,updatePost} from '../../actions/posts'
 function Form({currentId,setCurrentId}) {
-    const [postData,setPostData] = useState({title:'',message:'',creator:'',tags:'',selectedFile:''})
-
+    const [postData,setPostData] = useState({title:'',message:'',creator:'',tags:'',selectedFile:''});
+    const post = useSelector((state)=>(currentId?state.posts.find(message=>message._id===currentId):null));
+ 
     const dispatch =  useDispatch()
-    /** ..Submit form script.. */ 
+    
+    /** UseEffect for onClick Edit Button then Data Populate in From  */
+    useEffect(() => {
+      if(post) setPostData(post)
+    }, [post])
+    /** End UseEffect for onClick Edit Button then Data Populate in From  */
+
+    /** Submit form script.. */ 
     const handleSubmit = async(e) =>{
         e.preventDefault();
-        dispatch(createPost(postData));
+        if(currentId===0)
+        {
+            dispatch(createPost(postData));
+            alert('Form Successfully Sumbitted');
+            clear();
+        }
+        else{
+            dispatch(updatePost(currentId,postData)); 
+            alert('Form Updated Successfully..');
+            clear();
+            
+        }
+       
     }
+ /** END Submit form script.. */ 
+
     /** Clear Function Apply */
     const clear = () =>{
-        alert('Hello Alert');
+        setCurrentId(0);
+        setPostData({title:'',message:'',creator:'',tags:'',selectedFile:''})
     }
+    /** END Clear Function Apply */
   return (
     <div className='container'>
         <form onSubmit={handleSubmit}>
