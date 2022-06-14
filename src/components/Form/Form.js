@@ -58,7 +58,7 @@ function Form({currentId,setCurrentId}) {
                 <input type="tags" className="form-control" name="tags" value={postData.tags} onChange={(e)=>setPostData({...postData,tags:e.target.value})} id="message"/>
             </div>
             <div className="mb-3">
-                <input className="form-control form-control" id="selectedFile" name='selectedFile' type="file"/>
+                <input className="form-control form-control" id="selectedFile"  onChange={(e) => setPostData({ ...postData, selectedFile: e.target.value })} name='selectedFile' type="file"/>
             </div>
       
             <button type="submit"  className="btn btn-primary">Submit</button>

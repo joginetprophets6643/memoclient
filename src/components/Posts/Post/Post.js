@@ -27,6 +27,7 @@ function Post({ post, setCurrentId }) {
         </p>
         <button type="button" onClick={() => setCurrentId(post._id)} className="btn btn-primary">Edit</button>
         <button type="button" onClick={()=>deletefyn(deletePost(post._id))} className="btn btn-danger">Delete</button>
+        <button type="button" className="btn btn-info">Like</button>
       </div>
       <div className="card-footer text-muted">{post.creator}</div>
       <div className="card-footer text-muted">{moment(post.createdAt).fromNow()}</div>
