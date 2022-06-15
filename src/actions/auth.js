@@ -1,22 +1,21 @@
 import {AUTH} from '../constants/actionTypes';
 import * as api from '../api/index';
-export const signin = (formData,router) =>async(dispatch)=>{
+export const signin = (formData) =>async(dispatch)=>{
  try {
      const {data} = await api.signIn(formData);
      dispatch({type:AUTH,data});
-     router.push('/');
+     window.location.href = '/';
  } catch (error) {
-     console.log(error);
+     console.log(error.response.data.message);
+     alert(error.response.data.message);
  }
 
 }
-export const signup = (formData,router) =>async(dispatch)=>{
-    console.log('sign data',api);
+export const signup = (formData) =>async(dispatch)=>{
     try {
         const {data} = await api.signUp(formData)
-        console.log(data);
-        // dispatch({type:AUTH,data})
-        // router.push('/');
+        dispatch({type:AUTH,data})
+        window.location.href = '/';
     } catch (error) {
         console.log(error);
     }

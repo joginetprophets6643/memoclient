@@ -12,7 +12,7 @@ function Post({ post, setCurrentId }) {
     }
     
   return (
-    <div className="card text-center">
+    <div className="card text-center" style={{width:'18rem'}}>
         <img
           src="https://i.picsum.photos/id/372/200/300.jpg?grayscale&hmac=s1kZeGEVsozh8gSDtyyFn-ssukemkrwBNcnuWIiJsV4"
           className="card-img-top"
@@ -31,8 +31,8 @@ function Post({ post, setCurrentId }) {
       </div>
       <div className="card-footer text-muted">{post.creator}</div>
       <div className="card-footer text-muted">{moment(post.createdAt).fromNow()}</div>
-    
     </div>
+    
   );
 }
 
