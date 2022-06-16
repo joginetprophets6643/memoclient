@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { signin,signup } from '../../actions/auth';
-// import { AUTH } from '../../constants/actionTypes';
-import Danger from '../Message/Danger';
+import { AUTH } from '../../constants/actionTypes';
+import { GoogleLogin } from 'react-google-login';
 
 const initialState = {firstName:'',lastName:'',email:'',password:'',cpassword:''}
-function SignUp() {
+function Auth() {
     const [form ,setForm] = useState(initialState);
     const [isSignup, setIsSignup] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
@@ -32,6 +32,24 @@ function SignUp() {
     }
  /** END Submit Login/Registration form script.. */ 
 
+ const googleSuccess = async (res) => {
+    alert(res);
+    // const result = res?.profileObj;
+    // const token = res?.tokenId;
+    // try {
+    //   dispatch({ type: AUTH, data: { result, token } });
+
+    // //   history.push('/');
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
+
+//   const googleError = () => alert('Google Sign In was unsuccessful. Try again later');
+  const googleError = async(error) =>{ 
+    alert('Google Sign In was unsuccessful. Try again later');
+}
+
  const handlechange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
   return (
     <div className='container'>
@@ -43,27 +61,27 @@ function SignUp() {
             <>
                 <div className="mb-3">
                     <label htmlFor="Title" className="form-label">First Name</label>
-                    <input type="text" className="form-control" onChange={handlechange}  name='firstName' id="Title"  aria-describedby="emailHelp"/>
+                    <input type="text" className="form-control" required onChange={handlechange}  name='firstName' id="Title"  aria-describedby="emailHelp"/>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="lastName" className="form-label">Last Name</label>
-                    <input type="text" className="form-control" onChange={handlechange} name="lastName"  id="lastName"/>
+                    <input type="text" className="form-control" required onChange={handlechange} name="lastName"  id="lastName"/>
                 </div>
             </>
         )}
         <div className="mb-3">
             <label htmlFor="email" className="form-label">Email Address</label>
-            <input type="email" className="form-control" onChange={handlechange} name="email"  id="email"/>
+            <input type="email" className="form-control" required onChange={handlechange} name="email"  id="email"/>
         </div>
         <div className="mb-3">
             <label htmlFor="password" className="form-label">Password</label>
-            <input  className="form-control" onChange={handlechange} name="password" type={showPassword ? 'text' : 'password'}/>
+            <input  className="form-control" onChange={handlechange} required name="password" type={showPassword ? 'text' : 'password'}/>
         </div>
         { isSignup && (
             <>
             <div className="mb-3">
                 <label htmlFor="cpassword" className="form-label">Confirm Password</label>
-                <input type="password" className="form-control" onChange={handlechange} name="cpassword"  id="message"/>
+                <input type="password" className="form-control" required onChange={handlechange} name="cpassword"  id="message"/>
             </div>
             </>
           )
@@ -81,10 +99,22 @@ function SignUp() {
         </div>
 
         {/* <button type="button" className="btn btn-danger" onClick={clear}> Clear </button> */}
+
+        <GoogleLogin
+            clientId="741049085278-n25q9d4d6847vtkpsu2742er3l3rl92m.apps.googleusercontent.com"
+            render={(renderProps) => (
+              <button className="btn btn-danger" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled}>
+                Google Sign In
+              </button>
+            )}
+            onSuccess={googleSuccess}
+            onFailure={googleError}
+            cookiePolicy="single_host_origin"
+          />
     </form>
-    <Danger/>
+    
 </div>
   )
 }
 
-export default SignUp
+export default Auth

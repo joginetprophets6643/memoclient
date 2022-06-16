@@ -1,7 +1,7 @@
 import React from 'react';
 import {Routes, Route} from "react-router-dom";
 import  NavBar from './components/NavBar'
-import SignUp from './components/Auth/SignUp';
+import Auth from './components/Auth/Auth';
 import Welcome from './components/Welcome';
 
 
@@ -11,8 +11,8 @@ function App() {
     <>
       <NavBar/>
       <Routes>
-        <Route path="/" element={<Welcome />} />
-        <Route path="/login" element={<SignUp />} />
+        <Route path="/" exact element={<Welcome />} />
+        <Route path="/login" exact element={<Auth />} />
       </Routes>
     </>
   );

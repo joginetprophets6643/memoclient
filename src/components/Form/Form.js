@@ -4,9 +4,8 @@ import {createPost,updatePost} from '../../actions/posts'
 function Form({currentId,setCurrentId}) {
     const [postData,setPostData] = useState({title:'',message:'',creator:'',tags:'',selectedFile:''});
     const post = useSelector((state)=>(currentId?state.posts.find(message=>message._id===currentId):null));
- 
     const dispatch =  useDispatch()
-    
+    const user = JSON.parse(localStorage.getItem('profile'))
     /** UseEffect for onClick Edit Button then Data Populate in From  */
     useEffect(() => {
       if(post) setPostData(post)
@@ -18,12 +17,14 @@ function Form({currentId,setCurrentId}) {
         e.preventDefault();
         if(currentId===0)
         {
-            dispatch(createPost(postData));
+            // dispatch(createPost(postData));
+            dispatch(createPost({...postData,name: user?.result?.name }));
             alert('Form Successfully Sumbitted');
             clear();
         }
         else{
-            dispatch(updatePost(currentId,postData)); 
+            // dispatch(updatePost(currentId,postData)); 
+            dispatch(updatePost(currentId,{...postData,name: user?.result?.name })); 
             alert('Form Updated Successfully..');
             clear();
             
@@ -38,6 +39,17 @@ function Form({currentId,setCurrentId}) {
         setPostData({title:'',message:'',creator:'',tags:'',selectedFile:''})
     }
     /** END Clear Function Apply */
+ 
+    if (!user?.result?.name) {
+        return (
+          
+            <h1 align="center">
+              Please Sign In to create your own memories and like other's memories.
+            </h1>
+         
+        );
+      }
+
   return (
     <div className='container'>
         <form onSubmit={handleSubmit}>

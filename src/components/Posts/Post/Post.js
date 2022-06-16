@@ -1,12 +1,13 @@
 import React from "react";
 import moment from 'moment';
 import { useDispatch } from "react-redux";
-import {deletePost} from '../../../actions/posts'
+import {deletePost,likePost} from '../../../actions/posts'
 function Post({ post, setCurrentId }) {
     const dispatch = useDispatch();
+    const user = JSON.parse(localStorage.getItem('profile'));
     const deletefyn = async(e) =>{
             dispatch(deletePost(post._id));
-            alert('data Successfully Sumbitted');
+            alert('data Successfully Deleted');
             window.location.reload(false);
       
     }
@@ -25,9 +26,13 @@ function Post({ post, setCurrentId }) {
         <p className="card-text">
         {post.tags.map((tag) => `#${tag} `)}
         </p>
+        {/* {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && ( */}
         <button type="button" onClick={() => setCurrentId(post._id)} className="btn btn-primary">Edit</button>
+        {/* )} */}
+        {/* {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && ( */}
         <button type="button" onClick={()=>deletefyn(deletePost(post._id))} className="btn btn-danger">Delete</button>
-        <button type="button" className="btn btn-info">Like</button>
+        {/* )} */}
+        <button type="button" className="btn btn-info"  onClick={() => dispatch(likePost(post._id))}>Like</button>
       </div>
       <div className="card-footer text-muted">{post.creator}</div>
       <div className="card-footer text-muted">{moment(post.createdAt).fromNow()}</div>
