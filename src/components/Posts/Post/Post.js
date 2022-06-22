@@ -32,7 +32,7 @@ function Post({ post, setCurrentId }) {
         {/* {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && ( */}
         <button type="button" onClick={()=>deletefyn(deletePost(post._id))} className="btn btn-danger">Delete</button>
         {/* )} */}
-        <button type="button" className="btn btn-info"  onClick={() => dispatch(likePost(post._id))}>Like</button>
+        <button type="button" className="btn btn-info" disabled={!user?.result}  onClick={() => dispatch(likePost(post._id))}>Like</button>
       </div>
       <div className="card-footer text-muted">{post.creator}</div>
       <div className="card-footer text-muted">{moment(post.createdAt).fromNow()}</div>

@@ -1,5 +1,5 @@
-// import {FETCH_ALL,CREATE} from '../constants/actionType';
-import {FETCH_ALL,CREATE, UPDATE,DELETE,LIKE} from '../constants/actionTypes';
+
+import {FETCH_ALL,CREATE, UPDATE,DELETE,LIKE,START_LOADING,FETCH_BY_SEARCH,END_LOADING} from '../constants/actionTypes';
 import * as api from '../api/index.js';
 
 /** Create Post API */ 
@@ -51,7 +51,6 @@ export const deletePost = (id) => async(dispatch)=>{
 /** LIKE POST */
 export const likePost = (id) => async(dispatch) =>{
   const user = JSON.parse(localStorage.getItem('profile'));
-   console.log(user,'kkkk');
   try {
     const { data } = await api.likePost(id, user?.token);
 
@@ -61,3 +60,18 @@ export const likePost = (id) => async(dispatch) =>{
   }
 }
 /**END LIKE POST */
+
+/** SEARCH API*/
+export const getPostsBySearch = (searchQuery) => async (dispatch) => {
+        try {
+          dispatch({ type: START_LOADING });
+          
+          const { data: { data } } = await api.fetchPostsBySearch(searchQuery);
+      
+          dispatch({ type: FETCH_BY_SEARCH, payload: { data } });
+          dispatch({ type: END_LOADING });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+/** END SEARCH API  */

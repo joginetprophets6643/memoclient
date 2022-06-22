@@ -3,6 +3,7 @@ import {useDispatch} from 'react-redux';
 import Form from './Form/Form';
 import Posts from './Posts/Posts';
 import {getPosts} from '../actions/posts';
+import SearchForm from './Form/SearchForm';
 function Welcome() {
 const [currentId,setCurrentId] = useState(0);
 const dispatch = useDispatch();
@@ -18,6 +19,7 @@ dispatch(getPosts());
                 <Posts setCurrentId={setCurrentId}/>
                 </div>
                 <div className="col-md-3">
+                  <SearchForm />
                   <Form currentId={currentId} setCurrentId={setCurrentId} />
                 </div>
               </div>
