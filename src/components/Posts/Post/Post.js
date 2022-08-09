@@ -15,7 +15,7 @@ function Post({ post, setCurrentId }) {
   return (
     <div className="card text-center" style={{width:'18rem'}}>
         <img
-          src="https://i.picsum.photos/id/372/200/300.jpg?grayscale&hmac=s1kZeGEVsozh8gSDtyyFn-ssukemkrwBNcnuWIiJsV4"
+          src={post.selectedFile?post.selectedFile:"https://i.picsum.photos/id/372/200/300.jpg?grayscale&hmac=s1kZeGEVsozh8gSDtyyFn-ssukemkrwBNcnuWIiJsV4"}
           className="card-img-top"
           style={{ height: "200px" }}
           alt="..."

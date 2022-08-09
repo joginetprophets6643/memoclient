@@ -1,8 +1,8 @@
 import React from 'react'
-
+import  '../Posts/style.css'
 function CircularProgress() {
   return (
-    <div>Data Not Available</div>
+    <div  className="spin"></div>
   )
 }
 
