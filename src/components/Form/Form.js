@@ -66,10 +66,10 @@ function Form({currentId,setCurrentId}) {
                 <label htmlFor="message" className="form-label">Message</label>
                 <input type="message" className="form-control" name="message" value={postData.message} onChange={(e)=>setPostData({...postData,message:e.target.value})} id="message"/>
             </div>
-            <div className="mb-3">
+            {/* <div className="mb-3">
                 <label htmlFor="creator" className="form-label">Creator</label>
                 <input type="creator" className="form-control" name="creator" value={postData.creator} onChange={(e)=>setPostData({...postData,creator:e.target.value})} id="creator"/>
-            </div>
+            </div> */}
             <div className="mb-3">
                 <label htmlFor="tags" className="form-label">Tags</label>
                 <input type="tags" className="form-control" name="tags" value={postData.tags} onChange={(e)=>setPostData({...postData,tags:e.target.value})} id="message"/>
