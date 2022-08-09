@@ -8,6 +8,7 @@ function Form({currentId,setCurrentId}) {
     const post = useSelector((state)=>(currentId?state.posts.find(message=>message._id===currentId):null));
     const dispatch =  useDispatch()
     const user = JSON.parse(localStorage.getItem('profile'))
+    console.log(user);
     /** UseEffect for onClick Edit Button then Data Populate in From  */
     useEffect(() => {
       if(post) setPostData(post)
@@ -54,8 +55,9 @@ function Form({currentId,setCurrentId}) {
       }
 
   return (
-    <div className='container'>
-        <form onSubmit={handleSubmit} enctype="multipart/form-data" method='post'>
+    <div className='container mb-3'>
+         <h2>{currentId ? `Editing "${post?.title}"` : 'Creating a Memory'}</h2>
+        <form onSubmit={handleSubmit} encType="multipart/form-data" method='post'>
             <div className="mb-3">
                 <label htmlFor="Title" className="form-label">Title</label>
                 <input type="text" className="form-control" name='title' id="Title" value={postData.title} onChange={(e)=>setPostData({...postData,title:e.target.value})} aria-describedby="emailHelp"/>

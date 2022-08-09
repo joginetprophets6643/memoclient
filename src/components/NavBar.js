@@ -25,17 +25,19 @@ function NavBar() {
         setUser(JSON.parse(localStorage.getItem('profile')));
     }, [location])
     
+   
   return (
-    <nav className="navbar navbar-expand-lg bg-light">
+    
+    <nav className="navbar navbar-expand-lg bg-light mb-5">
         <div className="container-fluid">
             <Link className="navbar-brand" to="/">Home</Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <div className="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
             {user?.result ? (
                 <>
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                <span className="navbar-brand mb-0 h1" >{user?.result.name}</span>
                 <button className="btn btn-outline-success" type="button" onClick={logout}>Logout</button>
                 </>
                 ) : (
@@ -44,6 +46,7 @@ function NavBar() {
             </div>
         </div>
     </nav>
+    
   )
 }
 
