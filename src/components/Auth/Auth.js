@@ -3,8 +3,9 @@ import { useDispatch } from 'react-redux';
 import { signin,signup } from '../../actions/auth';
 import { AUTH } from '../../constants/actionTypes';
 import { GoogleLogin } from 'react-google-login';
+import FileBase64 from 'react-file-base64';
 
-const initialState = {firstName:'',lastName:'',email:'',password:'',cpassword:''}
+const initialState = {firstName:'',lastName:'',email:'',password:'',cpassword:'',profilePic:''}
 function Auth() {
     const [form ,setForm] = useState(initialState);
     const [isSignup, setIsSignup] = useState(false);
@@ -82,6 +83,9 @@ function Auth() {
             <div className="mb-3">
                 <label htmlFor="cpassword" className="form-label">Confirm Password</label>
                 <input type="password" className="form-control" required onChange={handlechange} name="cpassword"  id="message"/>
+            </div>
+            <div className="mb-3">
+              <FileBase64 type="file" multiple={false} onDone={({ base64 }) =>setForm({...form, profilePic: base64 })}/>
             </div>
             </>
           )

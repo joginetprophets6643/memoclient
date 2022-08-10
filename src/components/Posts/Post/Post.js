@@ -5,7 +5,6 @@ import {deletePost,likePost} from '../../../actions/posts'
 function Post({ post, setCurrentId }) {
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
-    console.log(user?.result?._id+'=='+post?._id);
     const deletefyn = async(e) =>{
             dispatch(deletePost(post._id));
             alert('data Successfully Deleted');

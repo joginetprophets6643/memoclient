@@ -7,8 +7,7 @@ function Form({currentId,setCurrentId}) {
     const [postData,setPostData] = useState({title:'',message:'',creator:'',tags:'',selectedFile:''});
     const post = useSelector((state)=>(currentId?state.posts.find(message=>message._id===currentId):null));
     const dispatch =  useDispatch()
-    const user = JSON.parse(localStorage.getItem('profile'))
-    console.log(user);
+    const user = JSON.parse(localStorage.getItem('profile'));
     /** UseEffect for onClick Edit Button then Data Populate in From  */
     useEffect(() => {
       if(post) setPostData(post)
@@ -36,7 +35,6 @@ function Form({currentId,setCurrentId}) {
        
     }
  /** END Submit form script.. */ 
-
     /** Clear Function Apply */
     const clear = () =>{
         setCurrentId(0);

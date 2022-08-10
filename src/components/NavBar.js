@@ -5,6 +5,7 @@ import decode from 'jwt-decode';
 import * as actionType from '../constants/actionTypes';
 function NavBar() {
     const [user,setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    console.log(user);
     const dispatch = useDispatch();
     const location = useLocation();
 
@@ -37,6 +38,7 @@ function NavBar() {
             <div className="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
             {user?.result ? (
                 <>
+                 <img className="rounded"  style={{width:'50px',hieght:'50px'}} src={user?.result.profilePic?user?.result.profilePic:"https://i.picsum.photos/id/372/200/300.jpg?grayscale&hmac=s1kZeGEVsozh8gSDtyyFn-ssukemkrwBNcnuWIiJsV4"}  alt="..."/>
                 <span className="navbar-brand mb-0 h1" >{user?.result.name}</span>
                 <button className="btn btn-outline-success" type="button" onClick={logout}>Logout</button>
                 </>
@@ -46,6 +48,7 @@ function NavBar() {
             </div>
         </div>
     </nav>
+
     
   )
 }
